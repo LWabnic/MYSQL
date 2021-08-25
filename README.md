@@ -92,7 +92,7 @@ select Code,Name from country where HeadOfState='Elizabeth II';
 
 17. select Name from country where Code in (select CountryCode from countrylanguage where Language='German' AND Percentage>50.0);
 
-18. select Name,LifeExpectancy from country where LifeExpectancy is not null order by LifeExpectancy asc limit 1;
+18. select Name,LifeExpectancy from country where LifeExpectancy is not null and LifeExpectancy>0 order by LifeExpectancy asc limit 1;
 
 19. select GovernmentForm,COUNT(GovernmentForm) as Forms from country group by GovernmentForm order by Forms desc limit 3;
 
@@ -100,13 +100,13 @@ select Code,Name from country where HeadOfState='Elizabeth II';
 
 MOVIELENS
 
-1. select title from movies where release_date between '1983-01-01' AND '1993-12-31' order by release_date desc ;
+1. select title,release_date from movies where release_date between '1983-01-01' AND '1993-12-31' order by release_date desc ;
 
 2. select movies.title from movies join ratings on movies.id=ratings.movie_id where ratings.rating =1;
 
 3. select distinct * from movies where id in (
 select movie_id from ratings where user_id in (select id from users where occupation_id=19 and age=24) AND rating=5) AND id in (select movie_id from genres_movies where genre_id=15);
 
-4. select title from movies where release_date=(select release_date from movies group by release_date order by COUNT(release_date) desc limit 1);
+4. select distinct title from movies where release_date=(select release_date from movies group by release_date order by COUNT(release_date) desc limit 1);
 
 5. select genre_id,COUNT(movie_id) as total from genres_movies group by genre_id order by total asc;
