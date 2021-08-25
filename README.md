@@ -102,7 +102,13 @@ MOVIELENS
 
 1. select title,release_date from movies where release_date between '1983-01-01' AND '1993-12-31' order by release_date desc ;
 
-2. select movies.title from movies join ratings on movies.id=ratings.movie_id where ratings.rating =1;
+2. SELECT x.name, x.avg FROM
+(SELECT movies.title AS name, AVG(ratings.rating) AS avg FROM ratings
+JOIN movies ON movies.id = ratings.movie_id
+GROUP BY ratings.movie_id) AS x
+WHERE x.avg = (
+SELECT MIN(y.avg) FROM (SELECT AVG(ratings.rating) AS avg FROM ratings
+GROUP BY ratings.movie_id) AS y);
 
 3. select distinct * from movies where id in (
 select movie_id from ratings where user_id in (select id from users where occupation_id=19 and age=24) AND rating=5) AND id in (select movie_id from genres_movies where genre_id=15);
