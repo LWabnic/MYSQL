@@ -71,7 +71,7 @@ WORLD
 5. select countryLanguage.Language from countryLanguage join country on countryLanguage.CountryCode=country.Code where Region='Southeast Asia';
 6. select Name from city where Name like 'F%' limit 25;
 7. select country.Name,COUNT(city.ID) from country join city on country.Code=city.CountryCode where city.CountryCode='CHN';
-8. select Name,Population from country where Population is not null order by Population desc limit 1;
+8. select Name,Population from country where Population is not null AND Population>0 order by Population asc limit 1;
 
 9. select COUNT(Name) from country;
 
