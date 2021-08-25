@@ -109,4 +109,4 @@ select movie_id from ratings where user_id in (select id from users where occupa
 
 4. select distinct title from movies where release_date=(select release_date from movies group by release_date order by COUNT(release_date) desc limit 1);
 
-5. select genre_id,COUNT(movie_id) as total from genres_movies group by genre_id order by total asc;
+5. select genres.name,COUNT(genres_movies.movie_id) as number from genres join genres_movies on genres.id=genres_movies.genre_id group by genres.name order by number asc;
