@@ -90,7 +90,7 @@ select Code,Name from country where HeadOfState='Elizabeth II';
 
 16. select country.Name,COUNT(countrylanguage.Language) as NoOfLAng from country join countrylanguage on country.Code = countrylanguage.CountryCode group by country.Name order by NoOfLAng desc limit 10;
 
-17. select Language,CountryCode from countrylanguage where Language='German' AND Percentage>50.0;
+17. select Name from country where Code in (select CountryCode from countrylanguage where Language='German' AND Percentage>50.0);
 
 18. select Name,LifeExpectancy from country where LifeExpectancy is not null order by LifeExpectancy asc limit 1;
 
